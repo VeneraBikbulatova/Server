@@ -19,7 +19,7 @@ public class DeleteStudentHandler implements IHandler {
         ObjectMapper mapper = new ObjectMapper();
         try {
             DeleteStudentRequest request = mapper.readValue(requestBody, DeleteStudentRequest.class);
-            ResponseEntity<CommonResponse<Boolean>> res = studentController.
+            ResponseEntity<CommonResponse<Void>> res = studentController.
                     delStudentById(request);
             return mapper.writeValueAsString(res);
         } catch (IOException e) {

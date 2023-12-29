@@ -3,6 +3,8 @@ package fctk.server.response;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import fctk.server.entity.Student;
+import fctk.server.entity.StudentDB;
 
 import java.util.Objects;
 
@@ -28,6 +30,7 @@ public class GetStudentByIdResponse {
         this.middlename = middlename;
         this.group = group;
         this.status = status;
+
     }
 
     public long getId() {
@@ -53,7 +56,6 @@ public class GetStudentByIdResponse {
     public String getStatus() {
         return status;
     }
-
 
     @Override
     public boolean equals(Object o) {

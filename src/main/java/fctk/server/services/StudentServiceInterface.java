@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface StudentServiceInterface {
     long addStudent(StudentDB studentDB) throws AddStudentException, ServerException;
-    Student getStudentById(long id) throws GetStudentByIdException, RepositoryException, ServerException;
+    GetStudentByIdResponse getStudentById(long id) throws GetStudentByIdException, RepositoryException, ServerException;
     void deleteStudent(long id) throws DeleteStudentException, RepositoryException, ServerException;
     void editStudent(StudentDB studentDB) throws EditStudentException, ServerException;
     List<Student> getStudentsByGroup(long groupId) throws ServerException;

@@ -29,9 +29,15 @@ public class StudentService implements StudentServiceInterface{
     }
 
     @Override
-    public Student getStudentById(long id) throws GetStudentByIdException, RepositoryException, ServerException {
+    public GetStudentByIdResponse getStudentById(long id) throws GetStudentByIdException, RepositoryException, ServerException {
         try {
-            return studentRepository.getStudentById(id);
+            var student = studentRepository.getStudentById(id);
+            return new GetStudentByIdResponse(id,
+                    student.getLastname(),
+                    student.getFirstname(),
+                    student.getMiddlename(),
+                    student.getGroup().getName(),
+                    student.getStatus());
         } catch (Exception exception) {
             throw new ServerException("smth goes wrong");
         }

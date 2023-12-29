@@ -2,8 +2,6 @@ package fctk.server.controllers;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import fctk.server.entity.StudentDB;
-import fctk.server.repository.DataBase;
-import fctk.server.repository.StudentRepository;
 import fctk.server.request.*;
 import fctk.server.response.*;
 import fctk.server.services.StudentService;
@@ -69,14 +67,14 @@ public class StudentController {
         try {
             List<String> errors = getStudentByIdRequestValidator.validate(getStudentByIdRequest);
             if (errors.isEmpty()) {
+                var student = studentService.getStudentById(getStudentByIdRequest.getId());
                 commonResponse =
-                        new CommonResponse<>(new GetStudentByIdResponse(1,
-                                "last",
-                                "first",
-                                "middle",
-                                "group",
-                                "status"));
-                studentService.getStudentById(commonResponse.getData().getId());
+                        new CommonResponse<>(new GetStudentByIdResponse(student.getId(),
+                                student.getLastname(),
+                                student.getFirstname(),
+                                student.getMiddlename(),
+                                student.getGroup(),
+                                student.getStatus()));
                 httpStatus = 201;
             } else {
                 commonResponse =
@@ -114,9 +112,9 @@ public class StudentController {
         }
     }
 
-    public ResponseEntity<CommonResponse<Boolean>> delStudentById(DeleteStudentRequest deleteStudentRequest) {
+    public ResponseEntity<CommonResponse<Void>> delStudentById(DeleteStudentRequest deleteStudentRequest) {
         int httpStatus;
-        CommonResponse<Boolean> commonResponse;
+        CommonResponse<Void> commonResponse;
         try {
             List<String> errors = deleteStudentRequestValidator.validate(deleteStudentRequest);
             if (errors.isEmpty()) {

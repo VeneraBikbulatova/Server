@@ -63,12 +63,20 @@ public class StudentRepository implements StudentRepositoryInterface{
                 currentDBStudent.getLastname(),
                 currentDBStudent.getFirstname(),
                 currentDBStudent.getMiddlename(),
-                Optional.ofNullable(
-                    dataBase.getGroupTable().get(currentDBStudent.getGroupId())
-                ).orElseThrow(() -> new RepositoryException("Group not found")),
+                new Group("group", currentDBStudent.getGroupId()),
                 currentDBStudent.getId(),
                 currentDBStudent.getStatus()
         );
+//        Student student = new Student(
+//                currentDBStudent.getLastname(),
+//                currentDBStudent.getFirstname(),
+//                currentDBStudent.getMiddlename(),
+//                Optional.ofNullable(
+//                    dataBase.getGroupTable().get(currentDBStudent.getGroupId())
+//                ).orElseThrow(() -> new RepositoryException("Group not found")),
+//                currentDBStudent.getId(),
+//                currentDBStudent.getStatus()
+//        );
         return student;
     }
 
