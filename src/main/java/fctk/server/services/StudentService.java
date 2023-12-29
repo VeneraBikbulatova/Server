@@ -22,7 +22,6 @@ public class StudentService implements StudentServiceInterface{
     @Override
     public long addStudent(StudentDB studentDB) throws AddStudentException, ServerException {
         try {
-            System.out.println(studentRepository.addStudent(studentDB));
             return studentRepository.addStudent(studentDB);
         } catch (Exception exception) {
             throw new ServerException("somthng goes wrong");

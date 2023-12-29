@@ -25,13 +25,14 @@ public class StudentController {
                              Validator<EditStudentRequest> editStudentRequestValidator,
                              Validator<GetStudentByIdRequest> getStudentByIdRequestValidator,
                              Validator<GetStudentsByGroupRequest> getStudentsByGroupRequestValidator,
-                             Validator<DeleteStudentRequest> deleteStudentRequestValidator) {
+                             Validator<DeleteStudentRequest> deleteStudentRequestValidator,
+                             StudentService studentService) {
         this.addStudentRequestValidator = addStudentRequestValidator;
         this.editStudentRequestValidator = editStudentRequestValidator;
         this.getStudentByIdRequestValidator = getStudentByIdRequestValidator;
         this.getStudentsByGroupRequestValidator = getStudentsByGroupRequestValidator;
         this.deleteStudentRequestValidator = deleteStudentRequestValidator;
-        this.studentService = new StudentService(new StudentRepository(new DataBase()));
+        this.studentService = studentService;
     }
 
     public ResponseEntity<CommonResponse<AddStudentResponse>> addStudent(AddStudentRequest addStudentRequest) {
@@ -49,7 +50,6 @@ public class StudentController {
                                 addStudentRequest.getId(),
                                 addStudentRequest.getStatus()
                         )));
-                System.out.println(commonResponse.getData().getStudentDB().toString());
                 studentService.addStudent(commonResponse.getData().getStudentDB());
                 httpStatus = 201;
             } else {
@@ -151,7 +151,6 @@ public class StudentController {
                         editStudentRequest.getId(),
                         editStudentRequest.getStatus()
                 ));
-
             } else {
                 commonResponse =
                         new CommonResponse<>(1, "Validation error", errors);

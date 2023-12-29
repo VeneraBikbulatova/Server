@@ -31,7 +31,6 @@ public class StudentRepository implements StudentRepositoryInterface{
 
     @Override
     public Student editStudent(StudentDB student) throws RepositoryException {
-        System.out.println(dataBase.getStudents());
         if(dataBase.getStudents().get(student.getId()) == null){
             throw new RepositoryException("Student with id:" + student.getId() + "not found");
         }
